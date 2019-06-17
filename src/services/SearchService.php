@@ -14,6 +14,7 @@ use imarc\googlecustomsearch\Plugin;
 
 use Craft;
 use craft\base\Component;
+use craft\helpers\UrlHelper;
 
 /**
  * SearchService Service
@@ -50,7 +51,10 @@ class SearchService extends Component
 
         $context = stream_context_create(array(
             'http' => array(
-                'ignore_errors' => true
+                'ignore_errors' => true,
+                'header' => array(
+                    "Referer: " . UrlHelper::baseSiteUrl() . "\r\n",
+                ),
             )
         ));
 
